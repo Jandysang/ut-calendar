@@ -2,9 +2,15 @@ import toDate from 'date-fns-tz/toDate';
 
 import _ from 'lodash';
 import defaultLocales from './defaults/locales';
-import { isObject } from './tool';
+import { isObject, isDate } from './tool';
 
 import { pad } from './helpers';
+
+const PATCH_KEYS = {
+    1: ['year', 'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'],
+    2: ['year', 'month', 'day'],
+    3: ['hours', 'minutes', 'seconds', 'milliseconds'],
+};
 
 const daysInWeek = 7;
 
@@ -112,10 +118,50 @@ export default class Locale {
         return dates;
     }
 
-    // normalizeDates(dates, opts) {
-    //     debugger;
-    //     console.log(dates, opts);
-    // }
+    normalizeDate(d, config = {}) {
+        debugger;
+        let result = null;
+        let { type, fillDate } = config;
+        const { mask, patch, time } = config;
+        const auto = type === 'auto' || !type;
+        if (_.isNumber(d)) {
+            type = 'number';
+            result = new Date(+d);
+        } else if (_.isString(d)) {
+            type = 'string';
+            result = d ? this.parse(d, mask || 'iso') : null;
+        } else if (isObject(d)) {
+            type = 'object';
+            result = this.getDateFromParts(d);
+        } else {
+            type = 'date';
+            result = isDate(d) ? new Date(d.getTime()) : null;
+        }
+
+        if (result && patch) {
+            fillDate = fillDate == null ? new Date() : this.normalizeDate(fillDate);
+            const parts = {
+                ...this.getDateParts(fillDate),
+                ..._.pick(this.getDateParts(result), PATCH_KEYS[patch]),
+            };
+            result = this.getDateFromParts(parts);
+        }
+        if (auto) config.type = type;
+        if (result && !isNaN(result.getTime())) {
+            if (time) {
+                result = this.adjustTimeForDate(result, {
+                    timeAdjust: time,
+                });
+            }
+            return result;
+        }
+        return null;
+    }
+
+    normalizeDates(dates, opts) {
+        debugger;
+        console.log(dates, opts);
+    }
 
     // getDateParts(date, timezone = this.timezone) {
     //     debugger;
