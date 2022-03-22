@@ -3,6 +3,8 @@ node_modules
 /dist
 /lib
 package-lock.json
+.vuepress/.cache/
+.vuepress/.temp/
 
 
 # local env files
