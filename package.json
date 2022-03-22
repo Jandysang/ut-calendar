@@ -1,36 +1,28 @@
 {
-  "name": "ut-calendar",
-  "version": "1.0.0",
+  "name": "utui",
+  "version": "0.1.0",
   "private": true,
-  "description": "calendar component for vue.js",
-  "author": {
-    "name": "sangming12@sina.cn"
-  },
   "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name utui --dest lib packages/index.js",
     "lint": "vue-cli-service lint"
   },
-  "main": "index.js",
   "dependencies": {
-    "core-js": "^3.18.2",
-    "date-fns": "^2.25.0",
-    "date-fns-tz": "^1.1.6",
-    "lodash": "^4.17.21",
-    "vue": "^2.6.14"
+    "core-js": "^3.8.3",
+    "vue": "^3.2.31"
   },
   "devDependencies": {
-    "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
-    "@vue/babel-preset-jsx": "^1.2.4",
-    "@vue/cli": "^4.5.13",
-    "@vue/cli-plugin-babel": "^4.5.13",
-    "@vue/cli-plugin-eslint": "^4.5.13",
-    "@vue/cli-service": "^4.5.13",
-    "@vue/eslint-config-airbnb": "^5.3.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.14"
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "vuepress": "^2.0.0-beta.36"
   },
   "eslintConfig": {
     "root": true,
@@ -38,33 +30,18 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     },
     "rules": {}
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
-  ],
-  "_id": "ut-calendar@1.0.0",
-  "bugs": {
-    "url": "https://github.com/Jandysang/ut-calendar/issues"
-  },
-  "homepage": "https://github.com/Jandysang/ut-calendar#readme",
-  "keywords": [
-    "vue",
-    "calendar",
-    "component"
-  ],
-  "license": "MIT",
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Jandysang/ut-calendar.git"
-  }
+    "not dead",
+    "not ie 11"
+  ]
 }
