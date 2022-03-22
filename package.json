@@ -1,12 +1,14 @@
 {
-  "name": "utui",
+  "name": "ut-ui",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main":"lib/ut-ui.common.js",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "docs:deploy":"npm run docs:build && bash docs-deploy.sh",
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name utui --dest lib packages/index.js",
+    "build": "vue-cli-service build --target lib --name ut-ui --dest lib packages/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -24,6 +26,7 @@
     "eslint-plugin-vue": "^8.0.3",
     "vuepress": "^2.0.0-beta.36"
   },
+  "license": "MIT",
   "eslintConfig": {
     "root": true,
     "env": {
